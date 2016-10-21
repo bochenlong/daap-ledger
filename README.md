@@ -63,3 +63,24 @@
 			dst  -->合约地址
 			meta -->元数据，可查询
 			body -->自定义数据结构
+
+#### 3.1 ledger-query方法详细说明
+##### 查询交易分为两种方式：
+1, `设置Transaction.meta属性进行查询` **注意：meta中的各个属性条件之间是与的关系，即需都满足**
+* 根据交易ID查询 设置meta - *("DaaP-Query-TXID","txidtext".getBytes())*
+* 根据交易内容查询 设置meta - *("DaaP-Query-BODY","bodytext".getBytes())*
+* 如果需要模糊查询 则使用 *"DaaP-Query-BODYLIKE"*
+* 根据自定义信息meta查询 设置meta - *("name","nametext")* 可设置多个，但认为它们是与的关系
+* 辅助查询条件页码 设置meta - *("DaaP-Query-PAGENO", "pageNotext")* 不写默认为1页，每页固定100记录
+
+2, `设置Transaction.body属性进行查询`，这时候你需要传入一个exp表达式，表达式形如："${body[bodytext]}".getBytes())
+* 根据交易ID查询 设置body表达式 *"${txid[txidtext]}".getBytes()*
+* 根据交易内容查询 设置body表达式 *"${body[bodytext]}".getBytes()* // 模糊body.like 注意：bodytext是将原byte[] Hex序列化过的文本
+* 根据自定义信息meta查询 设置body表达式 *"${meta[metak,metav]||meta[metak,metav]}".getBytes()* 注意：metav是将原byte[] Hex序列化过的文本
+* 辅助查询条件页码 设置body表达式 *"${body.like[bodytext]&&pageno[2]}".getBytes()* 不写默认为1页，每页固定100记录
+* 通过exp可以设置较为复杂的查询请求见示例代码
+
+**查询请注意：**
+ 1 如果查询条件中含有txid的条件，则默认只根据txid查询
+ 2 必须设置除辅助条件属性外的至少一个属性，否则查询为空
+ 3 exp表达式中必须以${}的形式

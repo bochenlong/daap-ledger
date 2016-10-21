@@ -34,8 +34,8 @@ public class DaapLedgerCaller {
      * <p>
      * <p>
      * 2 设置Transaction.body属性进行查询，这时候你需要传入一个exp表达式，表达式形如："${body[bodytext]}".getBytes())
-     * 根据交易ID查询 设置body表达式 "${txid[txidtext]}".getBytes() // 模糊body.like
-     * 根据交易内容查询 设置body表达式 "${body[bodytext]}".getBytes() 注意：bodytext是将原byte[] Hex序列化过的文本
+     * 根据交易ID查询 设置body表达式 "${txid[txidtext]}".getBytes()
+     * 根据交易内容查询 设置body表达式 "${body[bodytext]}".getBytes() // 模糊body.like 注意：bodytext是将原byte[] Hex序列化过的文本
      * 根据自定义信息meta查询 设置body表达式 "${meta[metak,metav]||meta[metak,metav]}".getBytes() 注意：metav是将原byte[] Hex序列化过的文本
      * 辅助查询条件页码 设置body表达式 "${body.like[bodytext]&&pageno[2]}".getBytes() 不写默认为1页，每页固定100记录
      * <p>
