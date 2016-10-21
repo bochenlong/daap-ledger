@@ -1,3 +1,5 @@
+package biz.pdxtech.daap.ledger;
+
 import biz.pdxtech.daap.api.contract.Transaction;
 import biz.pdxtech.daap.api.contract.TransactionStatus;
 import biz.pdxtech.daap.bcdriver.BlockChainDriver;
@@ -8,18 +10,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
-public class DaapCaller {
+public class DaapLedgerCaller {
     public static void main(String[] args) {
         Properties props = new Properties();
-        props.setProperty("privateKey", "00c101a018592f9004ed820a5513cba40d24c177acea9e9d58074a597c290f2788");
-        props.setProperty("ethereum.nodeRpcUrl", "http://10.1.1.219:8545");
-        props.setProperty("containerNodeUrl", "http://10.1.1.219:8080");
+        props.setProperty("privateKey", "137f9a8fa4fac8ad5b3752cc056eb0f733e5090271d61941a22f790833af4be9");
 
         BlockChainDriver driver = BlockChainDriverFactory.get(props);
         query(driver);
-//        check(driver);
-//        apply(driver);
-//        applyForQueryData(driver);
+        check(driver);
+        apply(driver);
+        applyForQueryData(driver);
     }
 
 
