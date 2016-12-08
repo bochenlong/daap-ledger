@@ -22,14 +22,14 @@
         <dependency>
             <groupId>biz.pdxtech.daap</groupId>
             <artifactId>daap-bcdriver</artifactId>
-            <version>1.0.6</version>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- ethbcdriver -->
         <dependency>
             <groupId>biz.pdxtech.daap</groupId>
             <artifactId>daap-ethbcdriver</artifactId>
-            <version>1.0.6</version>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -1,7 +1,6 @@
 package biz.pdxtech.daap.ledger;
 
 import biz.pdxtech.daap.api.contract.Transaction;
-import biz.pdxtech.daap.api.contract.TransactionStatus;
 import biz.pdxtech.daap.bcdriver.BlockChainDriver;
 import biz.pdxtech.daap.bcdriver.BlockChainDriverException;
 import biz.pdxtech.daap.bcdriver.BlockChainDriverFactory;
@@ -17,9 +16,8 @@ public class DaapLedgerCaller {
 
         BlockChainDriver driver = BlockChainDriverFactory.get(props);
         query(driver);
-        check(driver);
-        apply(driver);
-        applyForQueryData(driver);
+//        apply(driver);
+//        applyForQueryData(driver);
     }
 
 
@@ -52,7 +50,7 @@ public class DaapLedgerCaller {
         /**1 设置Transaction.meta属性进行查询*/
         Map<String, byte[]> map = new LinkedHashMap<>();
         /** 根据交易ID查询*/
-        map.put("DaaP-Query-TXID", "3e0fd9c3b1f923b8c47714c6ff13849c4d00ff2761171584b85feb2bb1b708da".getBytes());
+        map.put("DaaP-Query-TXID", "34ae1a39747e2a72660e871530b51f207100c5350b413335cf75999a51d274d5".getBytes());
         /** 根据交易内容匹配*/
         //map.put("DaaP-Query-BODY", "a writer".getBytes());
         //map.put("DaaP-Query-BODYLIKE", "a writer".getBytes());
@@ -86,22 +84,6 @@ public class DaapLedgerCaller {
             e.printStackTrace();
         }
 
-    }
-
-    private static void check(BlockChainDriver driver) {
-        Transaction tx = new Transaction();
-        Map<String, byte[]> meta = new HashMap<>();
-        meta.put("something", "".getBytes());
-        tx.setMeta(meta);
-        tx.setBody("check".getBytes());
-        try {
-            tx.setDst(new URI("daap://pdxdev/pdx.dapp/ledger/check"));
-            TransactionStatus res = driver.check(tx);
-            System.out.println(res.getReason());
-        } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     private static void apply(BlockChainDriver driver) {
