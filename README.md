@@ -67,6 +67,7 @@
 Ledger查询分为两类；两类查询都可以通过设置Transaction.meta属性进行查询或者Transaction.body属性进行查询
 
 **设置Transaction.meta属性查询**
+
 1 查询交易
  * 根据交易ID查询；设置meta - ("DaaP-Query-TXID","txidtext".getBytes())
  * 根据自定义信息meta查询 设置meta - ("name","nametext") 可设置多个，但认为它们是与的关系
@@ -76,6 +77,7 @@ Ledger查询分为两类；两类查询都可以通过设置Transaction.meta属�
  * 根据合约查询 设置meta - ("DaaP-Query-STATE-DST","dsttext")
    
 **设置Transaction.body属性进行查询，这时候你需要传入一个exp表达式，表达式形如："${tx:body[bodytext]}".getBytes())**
+
 1 查询交易
  * 根据交易ID查询 设置body表达式 `"${tx:txid[txidtext]}".getBytes() `
  * 根据自定义信息meta查询 设置body表达式 `"${tx:meta[metak,metav]||meta[metak,metav]}".getBytes()`
