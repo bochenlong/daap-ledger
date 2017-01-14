@@ -68,24 +68,26 @@ Ledger查询分为两类；两类查询都可以通过设置Transaction.meta属�
 
 ##### 设置Transaction.meta属性查询
 1 查询交易
-   ① 根据交易ID查询；设置meta - ("DaaP-Query-TXID","txidtext".getBytes())
-   ② 根据自定义信息meta查询 设置meta - ("name","nametext") 可设置多个，但认为它们是与的关系
+ * 根据交易ID查询；设置meta - ("DaaP-Query-TXID","txidtext".getBytes())
+ * 根据自定义信息meta查询 设置meta - ("name","nametext") 可设置多个，但认为它们是与的关系
    
- 2 查询合约状态
-   ① 根据交易ID查询；设置meta - ("DaaP-Query-STATE-TXID","txidtext".getBytes())；此处查询出来的结果为此次交易执行完的合约状态
-   ② 根据合约查询 设置meta - ("DaaP-Query-STATE-DST","dsttext")
+2 查询合约状态
+ * 根据交易ID查询；设置meta - ("DaaP-Query-STATE-TXID","txidtext".getBytes())；此处查询出来的结果为此次交易执行完的合约状态
+ * 根据合约查询 设置meta - ("DaaP-Query-STATE-DST","dsttext")
    
 ##### 设置Transaction.body属性进行查询，这时候你需要传入一个exp表达式，表达式形如："${tx:body[bodytext]}".getBytes())
 1 查询交易
-   ① 根据交易ID查询 设置body表达式 `"${tx:txid[txidtext]}".getBytes() `
-   ② 根据自定义信息meta查询 设置body表达式 `"${tx:meta[metak,metav]||meta[metak,metav]}".getBytes()`
-   *注意：metav是将原byte[] Hex序列化过的文本*
+ * 根据交易ID查询 设置body表达式 `"${tx:txid[txidtext]}".getBytes() `
+ * 根据自定义信息meta查询 设置body表达式 `"${tx:meta[metak,metav]||meta[metak,metav]}".getBytes()`
+   
+  *注意：metav是将原byte[] Hex序列化过的文本*
   *辅助查询条件页码 设置body表达式 "${tx:txid[txidtext]&&pageno[2]}".getBytes() 不写默认为1页，每页固定1000记录*
 
 2 查询合约状态
-    ① 根据交易Id查询 设置body表达式 "${state:txid[txidtext]}".getBytes()
-    ② 根据合约查询 设置body表达式 "${state:dst[dsttext]}".getBytes()
-     *辅助查询条件页码 设置body表达式 "${state:dst[dsttext]&&pageno[2]}".getBytes() 不写默认为1页，每页固定1000记录*
+* 根据交易Id查询 设置body表达式 "${state:txid[txidtext]}".getBytes()
+* 根据合约查询 设置body表达式 "${state:dst[dsttext]}".getBytes()
+ 
+ *辅助查询条件页码 设置body表达式 "${state:dst[dsttext]&&pageno[2]}".getBytes() 不写默认为1页，每页固定1000记录*
  
 ##### 查询请注意：
  1 如果查询条件中含有txid的条件，则默认只根据txid查询
